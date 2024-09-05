@@ -12,18 +12,24 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('HomePage'),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: IconButton(onPressed: (){
+              AuthService.authService.signOutUser();
+              //user null
+              User? user = AuthService.authService.getCurrentUser();
+              if(user==null)
+              {
+                Get.offAndToNamed('/signIn');
+              }
+
+            }, icon: const Icon(Icons.logout)),
+          ),
+        ],
       ),
       body: Center(
-        child: IconButton(onPressed: (){
-          AuthService.authService.signOut();
-          //user null
-          User? user = AuthService.authService.getCurrentUser();
-          if(user==null)
-            {
-              Get.offAndToNamed('/signIn');
-            }
-
-        }, icon: const Icon(Icons.logout)),
+        child: Text('----------Welcome-----------',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24),)
       ),
     );
   }
