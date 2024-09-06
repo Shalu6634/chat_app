@@ -1,4 +1,5 @@
 import 'package:chat_app/services/auth_services/auth_service.dart';
+import 'package:chat_app/services/google/google_auth_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,6 +18,7 @@ class HomePage extends StatelessWidget {
             padding: const EdgeInsets.all(10),
             child: IconButton(onPressed: (){
               AuthService.authService.signOutUser();
+              GoogleAuthService.googleAuthService.googleSignOut();
               //user null
               User? user = AuthService.authService.getCurrentUser();
               if(user==null)
