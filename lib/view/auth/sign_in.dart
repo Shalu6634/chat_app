@@ -6,7 +6,8 @@ import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 
-import '../../Controller/auth_controller.dart';
+
+import 'package:chat_app/controller/auth_controller.dart';
 import '../../services/auth_services/auth_service.dart';
 
 class SignIn extends StatelessWidget {
@@ -16,7 +17,7 @@ class SignIn extends StatelessWidget {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    var authController = Get.put(AuthController());
+    var authController = Get.put(Authcontroller());
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
