@@ -155,8 +155,8 @@ class SignUp extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(12))),
                   onPressed: () async {
-                    if (authController.txtPassword ==
-                        authController.txtConfirmPassword) {
+                    if (authController.txtPassword.text ==
+                        authController.txtConfirmPassword.text ) {
                       await AuthService.authService
                           .createAccountWithEmailAndPassword(
                               authController.txtEmail.text,
@@ -166,11 +166,10 @@ class SignUp extends StatelessWidget {
                     UserModal user =   UserModal(
                           name: authController.txtName.text,
                           email: authController.txtEmail.text,
-                          password: authController.txtPassword.text,
+                          // password: authController.txtPassword.text,
                           phone: authController.txtPhone.text,
                           token: "--",
-                          image:
-                              "https://media.istockphoto.com/id/1451587807/vector/user-profile-icon-vector-avatar-or-person-icon-profile-picture-portrait-symbol-vector.jpg?s=612x612&w=0&k=20&c=yDJ4ITX1cHMh25Lt1vI1zBn2cAKKAlByHBvPJ8gEiIg=");
+                          image: "https://media.istockphoto.com/id/1451587807/vector/user-profile-icon-vector-avatar-or-person-icon-profile-picture-portrait-symbol-vector.jpg?s=612x612&w=0&k=20&c=yDJ4ITX1cHMh25Lt1vI1zBn2cAKKAlByHBvPJ8gEiIg=");
 
                       CloudFireStoreServices.cloudFireStoreServices.insertUserIntoFireStore(user);
                       Get.back();

@@ -13,7 +13,7 @@ class CloudFireStoreServices {
       'name':user.name,
       'phone':user.phone,
       'image':user.image,
-      'password':user.password,
+      // 'password':user.password,
       'token':user.token
       // "name"user.name
     });
