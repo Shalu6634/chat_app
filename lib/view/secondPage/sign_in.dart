@@ -19,84 +19,92 @@ class SignIn extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     var authController = Get.put(Authcontroller());
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          'Sign In',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+
+      body:
+      Container(
+        height: height*1,
+        width: width*1,
+        decoration: BoxDecoration(
+            image: DecorationImage(fit: BoxFit.cover,image: AssetImage("assets/img/bg.jpeg"))
         ),
-        backgroundColor: Colors.orangeAccent,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
+        child:  SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               SizedBox(
-                height: height * 0.1,
+                height: height * 0.2,
               ),
               const Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Lets Get Start!',
-                    style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                  alignment: Alignment.center,
+                  child: Expanded(
+                    child: Text(
+                      'Sign In',
+                      style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                    ),
                   )),
               SizedBox(
                 height: height * 0.1,
               ),
-              TextField(
-                controller: authController.txtEmail,
-                decoration: const InputDecoration(
-                    label: Text('Email'),
-                    hintText: 'abc@gmail.com',
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.orangeAccent),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(12),
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.orangeAccent),
+              Padding(
+                padding: const EdgeInsets.all(12),
+                child: TextField(
+                  controller: authController.txtEmail,
+                  decoration: const InputDecoration(
+                      label: Text('Email'),
+                      hintText: 'abc@gmail.com',
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xff1f6563)),
                         borderRadius: BorderRadius.all(
                           Radius.circular(12),
-                        ))),
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Color(0xff1f6563)),
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(12),
+                          ))),
+                ),
               ),
-               Padding(
-                padding: const EdgeInsets.only(top: 16),
+              Padding(
+                padding: const EdgeInsets.all(12),
                 child: TextField(
                   controller: authController.txtPassword,
                   decoration: const InputDecoration(
                       label: Text('Password'),
                       hintText: '123455',
                       enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.orangeAccent),
+                        borderSide: BorderSide(color: Color(0xff1f6563)),
                         borderRadius: BorderRadius.all(
                           Radius.circular(12),
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.orangeAccent),
+                          borderSide: BorderSide(color: Color(0xff1f6563)),
                           borderRadius: BorderRadius.all(
                             Radius.circular(12),
                           ))),
                 ),
               ),
-              SizedBox(
-                height: height * 0.05,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Align(alignment: Alignment.centerRight,child: Text("Forgot password?",style: TextStyle(color: Colors.grey),)),
               ),
               SizedBox(
-                  width: width * 1,
+                height: height * 0.03,
+              ),
+              SizedBox(
+                  width: width * 0.9,
+                  height: height*0.060,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.orangeAccent,
+                        backgroundColor: Color(0xff1f6563),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12))),
                     onPressed: () async {
                       String response = await AuthService.authService
                           .signInWithEmailAndPassword(
-                              authController.txtEmail.text,
-                              authController.txtPassword.text);
+                          authController.txtEmail.text,
+                          authController.txtPassword.text);
                       //
                       User? user = AuthService.authService.getCurrentUser();
                       if (user != null && response == 'success') {
@@ -105,15 +113,15 @@ class SignIn extends StatelessWidget {
                         Get.snackbar('Sign in failed', response);
                       }
                     },
-                    child: const Text('Sign In'),
+                    child: const Text('Sign In',style: TextStyle(color: Colors.white),),
                   )),
-              SignInButton(Buttons.google, onPressed: (){
-                GoogleAuthService.googleAuthService.signInWithGoogle();
-                User? user = AuthService.authService.getCurrentUser();
-                if (user != null) {
-                  Get.offAndToNamed('/home');
-                }
-              }),
+              // SignInButton(Buttons.google, onPressed: (){
+              //   GoogleAuthService.googleAuthService.signInWithGoogle();
+              //   User? user = AuthService.authService.getCurrentUser();
+              //   if (user != null) {
+              //     Get.offAndToNamed('/home');
+              //   }
+              // }),
               Align(
                 alignment: Alignment.centerRight,
                 child: Padding(
@@ -122,7 +130,7 @@ class SignIn extends StatelessWidget {
                       onPressed: () {
                         Get.toNamed('/signUp');
                       },
-                      child: const Text('Dont have account?Sign Up')),
+                      child: const Text('Dont have account?Sign Up',style: TextStyle(color: Colors.grey),)),
                 ),
               ),
             ],
