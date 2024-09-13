@@ -35,6 +35,7 @@ class GoogleAuthService {
       Get.snackbar("Google sign Failed!", e.toString());
       log(e.toString());
     }
+
   }
 
   Future<void> googleSignOut() async {
