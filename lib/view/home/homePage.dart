@@ -37,15 +37,51 @@ class HomePage extends StatelessWidget {
             future: CloudFireStoreServices.cloudFireStoreServices
                 .readCurrentUserData(),
             builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return Center(
+                  child: Text(snapshot.error.toString()),
+                );
+              }
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: CircularProgressIndicator(color: Color(0xff1f6563),),
+                );
+              }
+
               var data = snapshot.data!.data();
               UserModal userModal = UserModal.fromMap(data!);
-              if (snapshot.hasData) {
-                return Column(
-                  children: [Text(userModal.name!), Text(userModal.email!)],
-                );
-              } else {
-                return const CircularProgressIndicator();
-              }
+              return Column(
+                children: [
+                  DrawerHeader(
+                    child:  CircleAvatar(
+                      radius: 50,
+                        backgroundImage: NetworkImage(userModal.image!),
+                      ),
+                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      const Text("Name  :  "),
+                      Text(userModal.name!),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      const Text("Email:",style: TextStyle(fontFamily: 'robot'),),
+                      Text(userModal.email!),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      const Text("Phone :"),
+                      Text(userModal.phone!),
+                    ],
+                  ),
+
+                ],
+              );
             },
           ),
         ),
@@ -53,21 +89,25 @@ class HomePage extends StatelessWidget {
           future:
               CloudFireStoreServices.cloudFireStoreServices.readAllUserData(),
           builder: (context, snapshot) {
-            List<QuerySnapshot<Map<String, dynamic>>> dataList = snapshot.data!;
+            List dataList = snapshot.data!.docs;
             List<UserModal> userList = [];
-            for(var users in dataList)
-              {
-                userList.add(UserModal.fromMap(users[0]));
-              }
-
-
+            for (var users in dataList) {
+              userList.add(UserModal.fromMap(users.data()));
+            }
 
             if (snapshot.hasData) {
               return ListView.builder(
                 itemCount: userList.length,
-                itemBuilder: (context, index) {
-                  Text(userList.length.toString());
-                },
+                itemBuilder: (context, index) => Card(
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      backgroundImage: NetworkImage(userList[index].image!),
+                    ),
+                    title: Text(userList[index].name.toString()),
+                    subtitle: Text(userList[index].email.toString()),
+
+                  ),
+                ),
               );
             } else {
               return const CircularProgressIndicator();

@@ -52,6 +52,7 @@ class SignIn extends StatelessWidget {
                   decoration: const InputDecoration(
                       label: Text('Email'),
                       hintText: 'abc@gmail.com',
+                      hintStyle: TextStyle(color: Colors.grey),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Color(0xff1f6563)),
                         borderRadius: BorderRadius.all(
@@ -71,7 +72,7 @@ class SignIn extends StatelessWidget {
                   controller: authController.txtPassword,
                   decoration: const InputDecoration(
                       label: Text('Password'),
-                      hintText: '123455',
+
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Color(0xff1f6563)),
                         borderRadius: BorderRadius.all(

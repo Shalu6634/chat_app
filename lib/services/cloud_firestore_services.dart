@@ -29,6 +29,8 @@ class CloudFireStoreServices {
 
   Future<QuerySnapshot<Map<String, dynamic>>> readAllUserData()
   async {
-    return await firestore.collection("user").get();
+    User? user = AuthService.authService.getCurrentUser();
+    return await firestore.collection("user").where("email",isNotEqualTo: user!.email).get();
   }
+  //where("email",isnotequalto : user.email)
 }

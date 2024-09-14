@@ -146,8 +146,8 @@ class SignUp extends StatelessWidget {
                   ),
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.all(8.0),
+              Padding(
+                padding: const EdgeInsets.only(right: 25),
                 child: Align(
                     alignment: Alignment.centerRight,
                     child: Text(
@@ -156,7 +156,7 @@ class SignUp extends StatelessWidget {
                     )),
               ),
               SizedBox(
-                height: height * 0.02,
+                height: height * 0.010,
               ),
               SizedBox(
                 width: width * 0.9,
@@ -179,7 +179,7 @@ class SignUp extends StatelessWidget {
                           email: authController.txtEmail.text,
                           phone: authController.txtPhone.text,
                           token: "--",
-                          image: "https://media.istockphoto.com/id/1451587807/vector/user-profile-icon-vector-avatar-or-person-icon-profile-picture-portrait-symbol-vector.jpg?s=612x612&w=0&k=20&c=yDJ4ITX1cHMh25Lt1vI1zBn2cAKKAlByHBvPJ8gEiIg=");
+                          image: "https://p16-va.lemon8cdn.com/tos-maliva-v-ac5634-us/oEfybBD0LESArAC4CE5LWDZIIWGAfvHAXgemyn~tplv-tej9nj120t-origin.webp");
         
                       CloudFireStoreServices.cloudFireStoreServices
                           .insertUserIntoFireStore(user);
@@ -196,14 +196,11 @@ class SignUp extends StatelessWidget {
               ),
               Align(
                 alignment: Alignment.centerRight,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 5.0),
-                  child: TextButton(
-                      onPressed: () {
-                        Get.toNamed('/');
-                      },
-                      child: const Text('Already have account? Sign In',style: TextStyle(color: Colors.grey),)),
-                ),
+                child: TextButton(
+                    onPressed: () {
+                      Get.toNamed('/');
+                    },
+                    child: const Text('Already have account? Sign In',style: TextStyle(color: Colors.grey),)),
               ),
             ],
           ),
