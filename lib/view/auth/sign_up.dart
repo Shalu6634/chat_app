@@ -179,7 +179,7 @@ class SignUp extends StatelessWidget {
                           email: authController.txtEmail.text,
                           phone: authController.txtPhone.text,
                           token: "--",
-                          image: "https://p16-va.lemon8cdn.com/tos-maliva-v-ac5634-us/oEfybBD0LESArAC4CE5LWDZIIWGAfvHAXgemyn~tplv-tej9nj120t-origin.webp");
+                          image: 'https://p16-va.lemon8cdn.com/tos-maliva-v-ac5634-us/oEfybBD0LESArAC4CE5LWDZIIWGAfvHAXgemyn~tplv-tej9nj120t-origin.webp');
         
                       CloudFireStoreServices.cloudFireStoreServices
                           .insertUserIntoFireStore(user);

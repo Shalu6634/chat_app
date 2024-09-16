@@ -1,3 +1,4 @@
+import 'package:chat_app/controller/chat_controller.dart';
 import 'package:chat_app/modal/cloud_modal.dart';
 import 'package:chat_app/services/auth_services/auth_service.dart';
 import 'package:chat_app/services/cloud_firestore_services.dart';
@@ -12,6 +13,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var chatController = Get.put(ChatController());
     return Scaffold(
         appBar: AppBar(
           title: Text('HomePage'),
@@ -92,7 +94,7 @@ class HomePage extends StatelessWidget {
             List dataList = snapshot.data!.docs;
             List<UserModal> userList = [];
             for (var users in dataList) {
-              userList.add(UserModal.fromMap(users.data()));
+              userList.add(UserModal.fromMap(users.data()!));
             }
 
             if (snapshot.hasData) {
@@ -100,6 +102,10 @@ class HomePage extends StatelessWidget {
                 itemCount: userList.length,
                 itemBuilder: (context, index) => Card(
                   child: ListTile(
+                    onTap: (){
+                      chatController.getReceiver(userList[index].name!, userList[index].email!);
+                      Get.toNamed('/chat');
+                    },
                     leading: CircleAvatar(
                       backgroundImage: NetworkImage(userList[index].image!),
                     ),
