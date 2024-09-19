@@ -3,6 +3,7 @@
 import 'dart:developer';
 
 import 'package:chat_app/modal/cloud_modal.dart';
+import 'package:chat_app/services/cloud_firestore_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -23,12 +24,13 @@ class GoogleAuthService {
           idToken: googleSignInAuthentication.idToken);
       UserCredential userCredential =
           await FirebaseAuth.instance.signInWithCredential(credential);
-      UserModal(
+      UserModal userModal=UserModal(
           name: userCredential.user!.displayName.toString(),
           email: userCredential.user!.email,
-          phone: userCredential.user!.phoneNumber,
+          phone: userCredential.user!.phoneNumber.toString(),
           token: "___",
           image: userCredential.user!.photoURL.toString());
+      CloudFireStoreServices.cloudFireStoreServices.insertUserIntoFireStore(userModal);
       log(userCredential.user!.email.toString());
       log(userCredential.user!.photoURL.toString());
     } catch (e) {

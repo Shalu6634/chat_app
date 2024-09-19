@@ -2,7 +2,7 @@
 import 'package:chat_app/services/google/google_auth_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+
 import 'package:get/get.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 
@@ -24,7 +24,7 @@ class SignIn extends StatelessWidget {
       Container(
         height: height*1,
         width: width*1,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             image: DecorationImage(fit: BoxFit.cover,image: AssetImage("assets/img/bg.jpeg"))
         ),
         child:  SingleChildScrollView(
@@ -86,8 +86,8 @@ class SignIn extends StatelessWidget {
                           ))),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+              const Padding(
+                padding: EdgeInsets.all(8.0),
                 child: Align(alignment: Alignment.centerRight,child: Text("Forgot password?",style: TextStyle(color: Colors.grey),)),
               ),
               SizedBox(
@@ -98,7 +98,7 @@ class SignIn extends StatelessWidget {
                   height: height*0.060,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xff1f6563),
+                        backgroundColor: const Color(0xff1f6563),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(12))),
                     onPressed: () async {
@@ -109,10 +109,12 @@ class SignIn extends StatelessWidget {
                       //
                       User? user = AuthService.authService.getCurrentUser();
                       if (user != null && response == 'success') {
+                        GoogleAuthService.googleAuthService.signInWithGoogle();
                         Get.offAndToNamed('/home');
                       } else {
                         Get.snackbar('Sign in failed', response);
                       }
+
                     },
                     child: const Text('Sign In',style: TextStyle(color: Colors.white),),
                   )),

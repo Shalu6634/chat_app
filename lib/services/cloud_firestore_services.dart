@@ -3,7 +3,6 @@ import 'package:chat_app/modal/cloud_modal.dart';
 import 'package:chat_app/services/auth_services/auth_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 
 class CloudFireStoreServices {
   static CloudFireStoreServices cloudFireStoreServices =
@@ -55,12 +54,29 @@ class CloudFireStoreServices {
         .add(chat.toMap(chat));
   }
 
-  Stream<QuerySnapshot<Map<String, dynamic>>> readChatFromFireStore(String receiver)
-  {
+  Stream<QuerySnapshot<Map<String, dynamic>>> readChatFromFireStore(
+      String receiver) {
     String? sender = AuthService.authService.getCurrentUser()!.email;
-    List doc = [sender,receiver];
+    List doc = [sender, receiver];
     doc.sort();
     String docId = doc.join("_");
-    return fireStore.collection("chatroom").doc(docId).collection("chat").snapshots();
+    return fireStore
+        .collection("chatroom")
+        .doc(docId)
+        .collection("chat").orderBy("time",descending: false)
+        .snapshots();
+  }
+
+  Future<void> updateChat(String dcId, String receiver, String message) async {
+    String? sender = AuthService.authService.getCurrentUser()!.email;
+    List doc = [sender, receiver];
+    doc.sort();
+    String docId = doc.join("_");
+    await fireStore
+        .collection("chatroom")
+        .doc(docId)
+        .collection("chat")
+        .doc(dcId)
+        .update({'message': message});
   }
 }
