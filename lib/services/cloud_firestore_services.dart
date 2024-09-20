@@ -63,7 +63,8 @@ class CloudFireStoreServices {
     return fireStore
         .collection("chatroom")
         .doc(docId)
-        .collection("chat").orderBy("time",descending: false)
+        .collection("chat")
+        .orderBy("time", descending: false)
         .snapshots();
   }
 
@@ -78,5 +79,18 @@ class CloudFireStoreServices {
         .collection("chat")
         .doc(dcId)
         .update({'message': message});
+  }
+
+  Future<void> removeChat(String dcId, String receiver) async {
+    String? sender = AuthService.authService.getCurrentUser()!.email;
+    List doc = [sender, receiver];
+    doc.sort();
+    String docId = doc.join("_");
+    await fireStore
+        .collection("chatroom")
+        .doc(docId)
+        .collection("chat")
+        .doc(dcId)
+        .delete();
   }
 }
