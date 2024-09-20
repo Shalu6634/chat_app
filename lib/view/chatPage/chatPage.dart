@@ -119,6 +119,7 @@ class ChatPage extends StatelessWidget {
                                   topRight: Radius.circular(10),
                                   bottomRight: Radius.circular(10)),
                         ),
+
                         child: Padding(
                           padding: const EdgeInsets.all(10),
                           child: Text(

@@ -200,6 +200,7 @@ class SignUp extends StatelessWidget {
                     onPressed: () {
                       Get.toNamed('/');
                     },
+
                     child: const Text('Already have account? Sign In',style: TextStyle(color: Colors.grey),)),
               ),
             ],

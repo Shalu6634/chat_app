@@ -90,6 +90,7 @@ class SignIn extends StatelessWidget {
                 padding: EdgeInsets.all(8.0),
                 child: Align(alignment: Alignment.centerRight,child: Text("Forgot password?",style: TextStyle(color: Colors.grey),)),
               ),
+
               SizedBox(
                 height: height * 0.03,
               ),

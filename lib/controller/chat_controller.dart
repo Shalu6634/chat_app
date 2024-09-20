@@ -13,5 +13,6 @@ class ChatController extends GetxController
     receiverName.value = name;
     receiverEmail.value = email;
 
+
   }
 }

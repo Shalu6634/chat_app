@@ -10,4 +10,5 @@ class Authcontroller extends GetxController
   TextEditingController txtEmail = TextEditingController();
   TextEditingController txtPassword = TextEditingController();
 
+
 }

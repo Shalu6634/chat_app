@@ -80,6 +80,7 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
                 Row(
+
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     const Text("Phone :"),

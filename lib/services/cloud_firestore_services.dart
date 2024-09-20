@@ -68,6 +68,7 @@ class CloudFireStoreServices {
         .snapshots();
   }
 
+
   Future<void> updateChat(String dcId, String receiver, String message) async {
     String? sender = AuthService.authService.getCurrentUser()!.email;
     List doc = [sender, receiver];

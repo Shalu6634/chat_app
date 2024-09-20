@@ -15,6 +15,7 @@ class SelectedPage extends StatelessWidget {
             height: height * 1,
             width: width * 1,
             decoration: BoxDecoration(
+
                 image: DecorationImage(
                     fit: BoxFit.cover, image: AssetImage("assets/img/bg.jpeg"))),
             child: Stack(
