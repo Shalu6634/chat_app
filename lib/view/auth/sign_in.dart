@@ -36,11 +36,9 @@ class SignIn extends StatelessWidget {
               ),
               const Align(
                   alignment: Alignment.center,
-                  child: Expanded(
-                    child: Text(
-                      'Sign In',
-                      style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-                    ),
+                  child: Text(
+                    'Sign In',
+                    style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
                   )),
               SizedBox(
                 height: height * 0.1,
@@ -110,8 +108,9 @@ class SignIn extends StatelessWidget {
                       //
                       User? user = AuthService.authService.getCurrentUser();
                       if (user != null && response == 'success') {
-                        GoogleAuthService.googleAuthService.signInWithGoogle();
+
                         Get.offAndToNamed('/home');
+                        GoogleAuthService.googleAuthService.signInWithGoogle();
                       } else {
                         Get.snackbar('Sign in failed', response);
                       }

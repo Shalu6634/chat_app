@@ -8,6 +8,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -15,9 +16,12 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     var chatController = Get.put(ChatController());
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        title: Text('HomePage'),
+        backgroundColor: Colors.black,
+        title: Text('Chats',style: TextStyle(color: Colors.white),),
         actions: [
+          const Icon(Icons.add_comment_outlined,color: Colors.white),
           Padding(
             padding: const EdgeInsets.all(10),
             child: IconButton(
@@ -30,11 +34,11 @@ class HomePage extends StatelessWidget {
                     Get.offAndToNamed('/signIn');
                   }
                 },
-                icon: const Icon(Icons.logout)),
+                icon: const Icon(Icons.logout,color: Colors.white)),
           ),
         ],
       ),
-      drawer: Drawer(
+      drawer: Drawer(shadowColor: Colors.white,
         child: FutureBuilder(
           future: CloudFireStoreServices.cloudFireStoreServices
               .readCurrentUserData(),
@@ -58,7 +62,7 @@ class HomePage extends StatelessWidget {
               children: [
                 DrawerHeader(
                   child: CircleAvatar(
-                    radius: 50,
+                    radius: 60,
                     backgroundImage: NetworkImage(userModal.image!),
                   ),
                 ),
@@ -107,14 +111,18 @@ class HomePage extends StatelessWidget {
               itemBuilder: (context, index) => ListTile(
                 onTap: () {
                   chatController.getReceiver(
-                      userList[index].name!, userList[index].email!);
+                      userList[index].name!, userList[index].email!,userList[index].image!);
                   Get.toNamed('/chat');
                 },
                 leading: CircleAvatar(
                   backgroundImage: NetworkImage(userList[index].image!),
                 ),
-                title: Text(userList[index].name.toString()),
-                subtitle: Text(userList[index].email.toString()),
+                title: Text(userList[index].name.toString(),style: TextStyle(
+                  color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20
+                ),),
+                subtitle: Text(userList[index].email.toString(),style: TextStyle(
+                color: Colors.grey,fontSize: 13
+                ),),
               ),
             );
           } else {

@@ -2,7 +2,7 @@ import 'package:chat_app/controller/auth_controller.dart';
 import 'package:chat_app/modal/cloud_modal.dart';
 import 'package:chat_app/services/cloud_firestore_services.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+
 import 'package:get/get.dart';
 
 import '../../services/auth_services/auth_service.dart';
@@ -21,7 +21,7 @@ class SignUp extends StatelessWidget {
         child: Container(
           height: height * 1,
           width: width * 1,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
               image: DecorationImage(
                   fit: BoxFit.cover, image: AssetImage("assets/img/bg.jpeg"))),
           child: Column(
@@ -146,8 +146,8 @@ class SignUp extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(right: 25),
+              const Padding(
+                padding:  EdgeInsets.only(right: 25),
                 child: Align(
                     alignment: Alignment.centerRight,
                     child: Text(
@@ -179,7 +179,7 @@ class SignUp extends StatelessWidget {
                           email: authController.txtEmail.text,
                           phone: authController.txtPhone.text,
                           token: "--",
-                          image: 'https://p16-va.lemon8cdn.com/tos-maliva-v-ac5634-us/oEfybBD0LESArAC4CE5LWDZIIWGAfvHAXgemyn~tplv-tej9nj120t-origin.webp');
+                          image: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.facebook.com%2Fpermalink.php%2F%3Fstory_fbid%3D726656556228851%26id%3D100066535393876&psig=AOvVaw0OZQxE8urvDX0f3Ko_BEUN&ust=1727058131648000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCKCytIy_1YgDFQAAAAAdAAAAABAq');
         
                       CloudFireStoreServices.cloudFireStoreServices
                           .insertUserIntoFireStore(user);
