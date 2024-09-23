@@ -94,4 +94,19 @@ class CloudFireStoreServices {
         .doc(dcId)
         .delete();
   }
+
+  Future<void> changeOnlineStatus(bool status)
+  async {
+    String? email=AuthService.authService.getCurrentUser()!.email;
+    await fireStore.collection("user").doc(email).update({
+      'isOnline' : status,
+    });
+  }
+
+  Stream<DocumentSnapshot<Map<String, dynamic>>> findUserOnlineOrNot()
+  {
+    String? email= AuthService.authService.getCurrentUser()!.email;
+    return fireStore.collection("user").doc(email).snapshots();
+  }
+
 }

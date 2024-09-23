@@ -47,8 +47,13 @@ class SignIn extends StatelessWidget {
                 padding: const EdgeInsets.all(12),
                 child: TextField(
                   controller: authController.txtEmail,
+
+                  cursorColor: Color(0xff1f6563),
+                  cursorWidth: 2,
                   decoration: const InputDecoration(
                       label: Text('Email'),
+                     labelStyle: TextStyle(color: Color(0xff1f6563)
+                     ),
                       hintText: 'abc@gmail.com',
                       hintStyle: TextStyle(color: Colors.grey),
                       enabledBorder: OutlineInputBorder(
@@ -67,10 +72,13 @@ class SignIn extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(12),
                 child: TextField(
+                  cursorColor: Color(0xff1f6563),
                   controller: authController.txtPassword,
                   decoration: const InputDecoration(
                       label: Text('Password'),
-
+                      labelStyle:TextStyle(
+                        color: Color(0xff1f6563)
+                      ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: Color(0xff1f6563)),
                         borderRadius: BorderRadius.all(

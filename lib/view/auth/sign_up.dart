@@ -43,6 +43,7 @@ class SignUp extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(12),
                 child: TextField(
+                  cursorColor: Color(0xff1f6563),
                   controller: authController.txtName,
                   decoration: const InputDecoration(
                       label: Text('Name'),
@@ -65,6 +66,7 @@ class SignUp extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(12),
                 child: TextField(
+                  cursorColor: Color(0xff1f6563),
                   controller: authController.txtPhone,
                   decoration: const InputDecoration(
                       label: Text('Phone'),
@@ -86,6 +88,7 @@ class SignUp extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(12),
                 child: TextField(
+                  cursorColor: Color(0xff1f6563),
                   controller: authController.txtEmail,
                   decoration: const InputDecoration(
                       label: Text('Email'),
@@ -107,6 +110,7 @@ class SignUp extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(12),
                 child: TextField(
+                  cursorColor: Color(0xff1f6563),
                   controller: authController.txtPassword,
                   decoration: const InputDecoration(
                       label: Text('Password'),
@@ -127,6 +131,7 @@ class SignUp extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(12),
                 child: TextField(
+                  cursorColor: Color(0xff1f6563),
                   controller: authController.txtConfirmPassword,
                   decoration: const InputDecoration(
                       label: Text('Confirm Password'),

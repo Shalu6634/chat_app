@@ -1,3 +1,4 @@
+import 'package:chat_app/services/cloud_firestore_services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
@@ -16,4 +17,6 @@ class ChatController extends GetxController
     receiverImage.value=image;
 
   }
+
+
 }

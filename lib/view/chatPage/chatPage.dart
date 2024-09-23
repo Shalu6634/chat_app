@@ -16,9 +16,20 @@ class ChatPage extends StatelessWidget {
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text(
-          chatController.receiverName.value,
-          style: const TextStyle(color: Colors.white, fontSize: 17),
+        title: Column(
+          children: [
+            Text(
+              chatController.receiverName.value,
+              style: const TextStyle(color: Colors.white, fontSize: 17),
+            ),
+            StreamBuilder(
+                stream: CloudFireStoreServices.cloudFireStoreServices
+                    .findUserOnlineOrNot(),
+                builder: (context, snapshot) {
+                  Map? user = snapshot.data!.data();
+                  return Text(user!['isOnline']?"online":" ",style: TextStyle(color: Colors.green,fontSize: 12),);
+                },)
+          ],
         ),
         leading: Padding(
           padding: const EdgeInsets.only(left: 20),
@@ -27,9 +38,9 @@ class ChatPage extends StatelessWidget {
             backgroundImage: NetworkImage(chatController.receiverImage.value),
           ),
         ),
-        actions: [
+        actions: const [
           Padding(
-            padding: const EdgeInsets.all(10),
+            padding: EdgeInsets.all(10),
             child: Icon(
               Icons.more_vert_rounded,
               color: Colors.white,
@@ -147,8 +158,14 @@ class ChatPage extends StatelessWidget {
                             padding: const EdgeInsets.all(13),
                             child: Text(
                               chatList[index].message!,
-                              style:
-                                  TextStyle(color: (chatList[index].sender==AuthService.authService.getCurrentUser()!.email?Colors.white:Colors.black), fontSize: 15),
+                              style: TextStyle(
+                                  color: (chatList[index].sender ==
+                                          AuthService.authService
+                                              .getCurrentUser()!
+                                              .email
+                                      ? Colors.white
+                                      : Colors.black),
+                                  fontSize: 15),
                             ),
                           ),
                         ),

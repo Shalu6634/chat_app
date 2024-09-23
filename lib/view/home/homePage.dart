@@ -15,6 +15,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var chatController = Get.put(ChatController());
+
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -56,7 +57,7 @@ class HomePage extends StatelessWidget {
               );
             }
 
-            var data = snapshot.data!.data();
+            Map? data = snapshot.data!.data();
             UserModal userModal = UserModal.fromMap(data!);
             return Column(
               children: [
@@ -99,6 +100,10 @@ class HomePage extends StatelessWidget {
       body: FutureBuilder(
         future: CloudFireStoreServices.cloudFireStoreServices.readAllUserData(),
         builder: (context, snapshot) {
+          if(snapshot.connectionState==ConnectionState.waiting)
+          {
+            return const  Center(child:  CircularProgressIndicator());
+          }
           List dataList = snapshot.data!.docs;
           List<UserModal> userList = [];
           for (var users in dataList) {
@@ -125,9 +130,12 @@ class HomePage extends StatelessWidget {
                 ),),
               ),
             );
-          } else {
-            return const CircularProgressIndicator();
           }
+
+          return  Center(
+            child: Text(snapshot.error.toString()),
+          );
+
         },
       ),
     );
