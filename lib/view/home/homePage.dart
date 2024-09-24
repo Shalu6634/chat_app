@@ -1,12 +1,16 @@
+import 'dart:io';
+
 import 'package:chat_app/controller/chat_controller.dart';
 import 'package:chat_app/modal/cloud_modal.dart';
 import 'package:chat_app/services/auth_services/auth_service.dart';
 import 'package:chat_app/services/cloud_firestore_services.dart';
 import 'package:chat_app/services/google/google_auth_services.dart';
+import 'package:chat_app/utils/global.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 
 class HomePage extends StatelessWidget {
@@ -20,7 +24,7 @@ class HomePage extends StatelessWidget {
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text('Chats',style: TextStyle(color: Colors.white),),
+        title: Text('ChatApp',style: TextStyle(color: Color(0xff8feac6)),),
         actions: [
           const Icon(Icons.add_comment_outlined,color: Colors.white),
           Padding(
@@ -62,9 +66,17 @@ class HomePage extends StatelessWidget {
             return Column(
               children: [
                 DrawerHeader(
-                  child: CircleAvatar(
-                    radius: 60,
-                    backgroundImage: NetworkImage(userModal.image!),
+                  child: GestureDetector(
+                    onTap: () async {
+                      ImagePicker imagePicker = ImagePicker();
+                     XFile? file = await  imagePicker.pickImage(source: ImageSource.gallery);
+                     fileImage = File(file!.path);
+
+                    },
+                    child: CircleAvatar(
+                      radius: 60,
+                      backgroundImage:(fileImage!=null)?NetworkImage(FileImage(fileImage!).toString()):const NetworkImage('https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fvector%2Fdefault-avatar-female-profile-user-profile-icon-profile-picture-portrait-symbol-gm1469197622-500499399&psig=AOvVaw04lEsjZwuS41kogqnEzxRc&ust=1727224481056000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCNj9j-qq2ogDFQAAAAAdAAAAABAE'),
+                    ),
                   ),
                 ),
                 Row(
