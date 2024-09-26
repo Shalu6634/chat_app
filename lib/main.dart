@@ -1,5 +1,6 @@
 
 import 'package:chat_app/services/notification/local_notification_services.dart';
+import 'package:chat_app/view/SplashScreen.dart';
 import 'package:chat_app/view/auth/auth_manager.dart';
 import 'package:chat_app/view/chatPage/chatPage.dart';
 import 'package:chat_app/view/auth/sign_up.dart';
@@ -11,13 +12,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'firebase_options.dart';
 
+import 'package:timezone/data/latest_all.dart' as tz;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
+  tz.initializeTimeZones();
  await  LocalNotificationServices.notificationServices.initNotificationServices();
   runApp(const MyApp());
 }
@@ -32,9 +34,9 @@ class MyApp extends StatelessWidget {
        debugShowCheckedModeBanner: false,
       getPages: [
         // GetPage(name: '/', page:() => const Splashscreen(),),
-        GetPage(name: '/', page:() => const SelectedPage(),),
-        GetPage(name: '/auth', page:() => const AuthManager(),),
-        GetPage(name: '/signIn', page:() => const SignIn(),),
+        // GetPage(name: '/select', page:() => const SelectedPage(),),
+        // GetPage(name: '/auth', page:() => const AuthManager(),),
+        GetPage(name: '/', page:() => const SignIn(),),
         GetPage(name: '/signUp', page:() => const SignUp(),),
         GetPage(name: '/home', page:() => const HomePage(),),
         GetPage(name: '/chat', page:() => const ChatPage(),),
