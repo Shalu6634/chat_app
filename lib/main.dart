@@ -1,4 +1,5 @@
 
+import 'package:chat_app/services/messeging/firebase_messeging_service.dart';
 import 'package:chat_app/services/notification/local_notification_services.dart';
 import 'package:chat_app/view/SplashScreen.dart';
 import 'package:chat_app/view/auth/auth_manager.dart';
@@ -21,6 +22,8 @@ Future<void> main() async {
   );
   tz.initializeTimeZones();
  await  LocalNotificationServices.notificationServices.initNotificationServices();
+ await FirebaseMessagingService.fm.requestPermission();
+ await FirebaseMessagingService.fm.getDeviceToken();
   runApp(const MyApp());
 }
 
