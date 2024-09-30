@@ -1,43 +1,77 @@
-import 'dart:io';
 
+import 'package:animated_botton_navigation/animated_botton_navigation.dart';
 import 'package:chat_app/controller/chat_controller.dart';
+import 'package:chat_app/controller/themeModeChange.dart';
 import 'package:chat_app/modal/cloud_modal.dart';
 import 'package:chat_app/services/auth_services/auth_service.dart';
 import 'package:chat_app/services/cloud_firestore_services.dart';
 import 'package:chat_app/services/google/google_auth_services.dart';
 import 'package:chat_app/services/notification/local_notification_services.dart';
-import 'package:chat_app/utils/global.dart';
+import 'package:chat_app/view/chatPage/chatPage.dart';
+import 'package:chat_app/view/home/Profile.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 
+
+ThemeModeController controller   = Get.put(ThemeModeController());
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+   HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var chatController = Get.put(ChatController());
+    //---------------bottomSheet----------------------
 
+    final List<Widget> _pages = [
+     const  Center(child: Text('Home ', style: TextStyle(color: Colors.white),),),
+     const  Center(child: Text('Udates ', style: TextStyle(color: Colors.white),),),
+      const Center(child: Text('Communities ', style: TextStyle(color: Colors.white),),),
+      const Center(child: Text('Calls ', style: TextStyle(color: Colors.white),),),
+     const  Center(child: Text('Profile ', style: TextStyle(color: Colors.white),),),
+
+    ];
+    //bottom------------
+    var chatController = Get.put(ChatController());
+    double height = MediaQuery
+        .of(context)
+        .size
+        .height;
+    double width = MediaQuery
+        .of(context)
+        .size
+        .width;
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text(
-          'ChatApp',
-          style: TextStyle(color: Color(0xff8feac6)),
+        title: const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text(
+            'ChatApp',
+            style: TextStyle(color: Color(0xff8feac6), fontSize: 27),
+          ),
         ),
         actions: [
           Padding(
             padding: const EdgeInsets.all(10),
-            child: GestureDetector(onTap: () async {
-              await LocalNotificationServices.notificationServices.showScheduleNotification();
-            },child: const Icon(Icons.notification_add_outlined,color: Colors.white,)),
+            child: GestureDetector(
+                onTap: () async {
+                  await LocalNotificationServices.notificationServices
+                      .showScheduleNotification();
+                },
+                child: const Icon(
+                  Icons.notification_add_outlined,
+                  color: Colors.white,
+                )),
           ),
-          GestureDetector(onTap: () async {
-            await LocalNotificationServices.notificationServices.showPeriodicNotification();
-          },child: const Icon(Icons.add_comment_outlined, color: Colors.white)),
+          GestureDetector(
+              onTap: () async {
+                await LocalNotificationServices.notificationServices
+                    .showPeriodicNotification();
+              },
+              child:
+              const Icon(Icons.add_comment_outlined, color: Colors.white)),
           Padding(
             padding: const EdgeInsets.all(10),
             child: IconButton(
@@ -53,76 +87,49 @@ class HomePage extends StatelessWidget {
                 icon: const Icon(Icons.logout, color: Colors.white)),
           ),
         ],
-      ),
-      drawer: Drawer(
-        shadowColor: Colors.white,
-        child: FutureBuilder(
-          future: CloudFireStoreServices.cloudFireStoreServices
-              .readCurrentUserData(),
-          builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              return Center(
-                child: Text(snapshot.error.toString()),
-              );
-            }
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CircularProgressIndicator(
-                  color: Color(0xff1f6563),
-                ),
-              );
-            }
-
-            Map? data = snapshot.data!.data();
-            UserModal userModal = UserModal.fromMap(data!);
-            return Column(
-              children: [
-                DrawerHeader(
-                  child: GestureDetector(
-                    onTap: () async {
-                      ImagePicker imagePicker = ImagePicker();
-                      XFile? file = await imagePicker.pickImage(
-                          source: ImageSource.gallery);
-                      fileImage = File(file!.path);
-                    },
-                    child: CircleAvatar(
-                      radius: 60,
-                      backgroundImage: (fileImage != null)
-                          ? NetworkImage(FileImage(fileImage!).toString())
-                          : const NetworkImage(
-                              'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.istockphoto.com%2Fvector%2Fdefault-avatar-female-profile-user-profile-icon-profile-picture-portrait-symbol-gm1469197622-500499399&psig=AOvVaw04lEsjZwuS41kogqnEzxRc&ust=1727224481056000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCNj9j-qq2ogDFQAAAAAdAAAAABAE'),
-                    ),
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    const Text("Name  :  "),
-                    Text(userModal.name!),
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(60),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 10),
+            child: Container(
+              margin: EdgeInsets.only(right: 12, left: 12),
+              height: height * 0.065,
+              width: width,
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(30)),
+              child: Padding(
+                padding: const EdgeInsets.all(15),
+                child: Row(
                   children: [
                     const Text(
-                      "Email:",
-                      style: TextStyle(fontFamily: 'robot'),
+                      'Search ',
+                      style: TextStyle(color: Colors.grey, fontSize: 15),
                     ),
-                    Text(userModal.email!),
+                    SizedBox(
+                      width: width * 0.5,
+                    ),
+                    const Icon(
+                      Icons.search,
+                      color: Colors.grey,
+                    ),
+                    VerticalDivider(
+                      thickness: 1.5,
+                      color: Colors.grey.shade400,
+                      endIndent: 5,
+                      indent: 5,
+                    ),
+                    Icon(
+                      Icons.mic,
+                      color: Color(0xff1f6563),
+                    ),
                   ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    const Text("Phone :"),
-                    Text(userModal.phone!),
-                  ],
-                ),
-              ],
-            );
-          },
+              ),
+            ),
+          ),
         ),
       ),
+
       body: FutureBuilder(
         future: CloudFireStoreServices.cloudFireStoreServices.readAllUserData(),
         builder: (context, snapshot) {
@@ -138,33 +145,81 @@ class HomePage extends StatelessWidget {
           if (snapshot.hasData) {
             return ListView.builder(
               itemCount: userList.length,
-              itemBuilder: (context, index) => ListTile(
-                onTap: () {
-                  chatController.getReceiver(userList[index].name!,
-                      userList[index].email!, userList[index].image!);
-                  Get.toNamed('/chat');
-                },
-                leading: CircleAvatar(
-                  backgroundImage: NetworkImage(userList[index].image!),
-                ),
-                title: Text(
-                  userList[index].name.toString(),
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20),
-                ),
-                subtitle: Text(
-                  userList[index].email.toString(),
-                  style: TextStyle(color: Colors.grey, fontSize: 13),
-                ),
-              ),
+              itemBuilder: (context, index) =>
+                  Column(
+                    children: [
+                      ListTile(
+                        onTap: () {
+                          chatController.getReceiver(userList[index].name!,
+                              userList[index].email!, userList[index].image!);
+                          Get.toNamed('/chat');
+                        },
+                        leading: Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(color: Colors.white)
+                            ]
+                          ),
+                          child: CircleAvatar(
+                            radius: 25,
+                            backgroundImage: NetworkImage(userList[index].image!),
+
+                          ),
+                        ),
+                        title: Text(
+                          userList[index].name.toString(),
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20),
+                        ),
+                        subtitle: Text(
+                          userList[index].email.toString(),
+                          style: TextStyle(color: Colors.grey, fontSize: 13),
+                        ),
+                      ),
+                      Divider(
+                        thickness: 0.5,
+                        endIndent: 10,
+                        indent: 20,
+                      ),
+                    ],
+                  ),
             );
           }
 
           return Center(
             child: Text(snapshot.error.toString()),
           );
+        },
+      ),
+
+      bottomNavigationBar: AnimatedBottomNavigation(
+        selectedColor: chatController.changeColor(),
+        unselectedColor: Colors.white,
+        height: 50,
+        backgroundColor: Colors.black,
+        indicatorSpaceBotton: 20,
+        icons: const [
+          Icons.home,
+          Icons.update,
+          Icons.group,
+          Icons.call_rounded,
+          Icons.person,
+        ],
+        currentIndex: currentIndexValue,
+        onTapChange: (index) {
+          chatController.indexChange(index);
+          if(index == 0)
+            {
+              Get.to(const ChatPage());
+            }
+          else if(index==4)
+            {
+              Get.to(const ProfilePage());
+            }
+          print(index);
         },
       ),
     );

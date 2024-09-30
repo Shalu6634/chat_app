@@ -46,3 +46,10 @@ android {
 flutter {
     source = "../.."
 }
+
+dependencies {
+    // Existing dependencies here
+    implementation 'com.google.firebase:firebase-analytics:21.0.0'
+
+}
+

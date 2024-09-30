@@ -1,13 +1,12 @@
 
 import 'package:chat_app/services/messeging/firebase_messeging_service.dart';
 import 'package:chat_app/services/notification/local_notification_services.dart';
-import 'package:chat_app/view/SplashScreen.dart';
-import 'package:chat_app/view/auth/auth_manager.dart';
+
 import 'package:chat_app/view/chatPage/chatPage.dart';
 import 'package:chat_app/view/auth/sign_up.dart';
 import 'package:chat_app/view/auth/sign_in.dart';
 import 'package:chat_app/view/home/homePage.dart';
-import 'package:chat_app/view/secondPage/selectPage.dart';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -35,13 +34,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
        debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
       getPages: [
         // GetPage(name: '/', page:() => const Splashscreen(),),
         // GetPage(name: '/select', page:() => const SelectedPage(),),
-        // GetPage(name: '/auth', page:() => const AuthManager(),),
+        // GetPage(name: '/auth', page:() => const AuthManager(),
         GetPage(name: '/', page:() => const SignIn(),),
         GetPage(name: '/signUp', page:() => const SignUp(),),
-        GetPage(name: '/home', page:() => const HomePage(),),
+        GetPage(name: '/home', page:() => HomePage(),),
         GetPage(name: '/chat', page:() => const ChatPage(),),
 
       ],
