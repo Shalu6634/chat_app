@@ -126,13 +126,7 @@ class SignIn extends StatelessWidget {
                     },
                     child: const Text('Sign In',style: TextStyle(color: Colors.white),),
                   )),
-              SignInButton(Buttons.google, onPressed: (){
-                GoogleAuthService.googleAuthService.signInWithGoogle();
-                User? user = AuthService.authService.getCurrentUser();
-                if (user != null) {
-                  Get.offAndToNamed('/home');
-                }
-              }),
+
               Align(
                 alignment: Alignment.centerRight,
                 child: Padding(
@@ -144,6 +138,15 @@ class SignIn extends StatelessWidget {
                       child: const Text('Dont have account?Sign Up',style: TextStyle(color: Colors.grey),)),
                 ),
               ),
+              SignInButton(Buttons.google, onPressed: (
+
+                  ){
+                GoogleAuthService.googleAuthService.signInWithGoogle();
+                User? user = AuthService.authService.getCurrentUser();
+                if (user != null) {
+                  Get.offAndToNamed('/home');
+                }
+              }),
             ],
           ),
         ),

@@ -20,7 +20,8 @@ class CloudFireStoreServices {
       'phone': user.phone,
       'image': user.image,
       // 'password':user.password,
-      'token': user.token
+      'token': user.token,
+      'time' : DateTime.now(),
       // "name"user.name
     });
   }

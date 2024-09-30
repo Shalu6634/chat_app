@@ -42,14 +42,14 @@ class HomePage extends StatelessWidget {
         .size
         .width;
     return Scaffold(
-      backgroundColor: Colors.black,
+  backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.black,
+
         title: const Padding(
           padding: EdgeInsets.all(8.0),
           child: Text(
             'ChatApp',
-            style: TextStyle(color: Color(0xff8feac6), fontSize: 27),
+            style: TextStyle(color: Color(0xff00a985), fontSize: 27,fontWeight: FontWeight.bold),
           ),
         ),
         actions: [
@@ -62,7 +62,7 @@ class HomePage extends StatelessWidget {
                 },
                 child: const Icon(
                   Icons.notification_add_outlined,
-                  color: Colors.white,
+
                 )),
           ),
           GestureDetector(
@@ -71,7 +71,7 @@ class HomePage extends StatelessWidget {
                     .showPeriodicNotification();
               },
               child:
-              const Icon(Icons.add_comment_outlined, color: Colors.white)),
+              const Icon(Icons.add_comment_outlined)),
           Padding(
             padding: const EdgeInsets.all(10),
             child: IconButton(
@@ -84,10 +84,11 @@ class HomePage extends StatelessWidget {
                     Get.offAndToNamed('/signIn');
                   }
                 },
-                icon: const Icon(Icons.logout, color: Colors.white)),
+                icon: const Icon(Icons.logout)),
           ),
         ],
         bottom: PreferredSize(
+
           preferredSize: Size.fromHeight(60),
           child: Padding(
             padding: const EdgeInsets.only(top: 10),
@@ -96,7 +97,7 @@ class HomePage extends StatelessWidget {
               height: height * 0.065,
               width: width,
               decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(30)),
+                  color: Colors.grey.shade200, borderRadius: BorderRadius.circular(30)),
               child: Padding(
                 padding: const EdgeInsets.all(15),
                 child: Row(
@@ -156,33 +157,33 @@ class HomePage extends StatelessWidget {
                         },
                         leading: Container(
                           decoration: BoxDecoration(
+
                             shape: BoxShape.circle,
                             boxShadow: [
-                              BoxShadow(color: Colors.white)
+                              BoxShadow(color: Colors.black,blurRadius: 1)
                             ]
                           ),
                           child: CircleAvatar(
-                            radius: 25,
-                            backgroundImage: NetworkImage(userList[index].image!),
-
+                            radius: 27,
+                            backgroundImage: NetworkImage("${userList[index].image}"),
                           ),
                         ),
                         title: Text(
                           userList[index].name.toString(),
                           style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20),
+
+                              fontWeight: FontWeight.w500,
+                              fontSize: 17),
                         ),
                         subtitle: Text(
                           userList[index].email.toString(),
-                          style: TextStyle(color: Colors.grey, fontSize: 13),
+                          style: TextStyle(color: Colors.grey, fontSize: 13,fontWeight: FontWeight.w400),
                         ),
                       ),
-                      Divider(
+                      const Divider(
                         thickness: 0.5,
-                        endIndent: 10,
-                        indent: 20,
+                        endIndent: 20,
+                        indent: 80,
                       ),
                     ],
                   ),
@@ -196,10 +197,12 @@ class HomePage extends StatelessWidget {
       ),
 
       bottomNavigationBar: AnimatedBottomNavigation(
+
         selectedColor: chatController.changeColor(),
-        unselectedColor: Colors.white,
+        unselectedColor: Colors.black,
         height: 50,
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.white,
+
         indicatorSpaceBotton: 20,
         icons: const [
           Icons.home,
@@ -213,8 +216,20 @@ class HomePage extends StatelessWidget {
           chatController.indexChange(index);
           if(index == 0)
             {
-              Get.to(const ChatPage());
+              Get.to( HomePage());
             }
+          else if(index==1)
+          {
+            Get.to( HomePage());
+          }
+          else if(index==2)
+          {
+            Get.to( HomePage());
+          }
+          else if(index==3)
+          {
+            Get.to( HomePage());
+          }
           else if(index==4)
             {
               Get.to(const ProfilePage());
