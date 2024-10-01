@@ -1,4 +1,5 @@
 
+import 'package:chat_app/controller/themeModeChange.dart';
 import 'package:chat_app/services/messeging/firebase_messeging_service.dart';
 import 'package:chat_app/services/notification/local_notification_services.dart';
 import 'package:chat_app/view/SplashScreen.dart';
@@ -13,6 +14,9 @@ import 'package:chat_app/view/secondPage/selectPage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'controller/themeModeChange.dart';
+import 'controller/themeModeChange.dart';
+import 'controller/themeModeChange.dart';
 import 'firebase_options.dart';
 
 import 'package:timezone/data/latest_all.dart' as tz;
@@ -36,6 +40,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+
        debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -54,3 +59,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+

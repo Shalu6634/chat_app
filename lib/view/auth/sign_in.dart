@@ -74,7 +74,10 @@ class SignIn extends StatelessWidget {
                 child: TextField(
                   cursorColor: Color(0xff1f6563),
                   controller: authController.txtPassword,
+                   obscureText: false,
+
                   decoration: const InputDecoration(
+
                       label: Text('Password'),
                       labelStyle:TextStyle(
                         color: Color(0xff1f6563)

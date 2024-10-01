@@ -35,7 +35,7 @@ class ChatController extends GetxController
   }
   Color changeColor()
   {
-    return const Color(0xff68d4d1);
+    return const Color(0xff00a985);
   }
 
 

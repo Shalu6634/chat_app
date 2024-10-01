@@ -18,9 +18,9 @@ class ChatPage extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
     var chatController = Get.put(ChatController());
     return Scaffold(
-      backgroundColor: Colors.black,
+
       appBar: AppBar(
-        backgroundColor: Colors.black,
+      backgroundColor: chatController.changeColor(),
         leadingWidth: width * 1.5,
         leading: Row(
           mainAxisSize: MainAxisSize.min,
@@ -93,7 +93,8 @@ class ChatPage extends StatelessWidget {
         shadowColor: Colors.white70,
         elevation: 1.5,
       ),
-      body: Column(
+      body:
+      Column(
         children: [
           Expanded(
               child: StreamBuilder(
@@ -205,8 +206,8 @@ class ChatPage extends StatelessWidget {
                                       AuthService.authService
                                           .getCurrentUser()!
                                           .email
-                                  ? const Color(0xff1f6563)
-                                  : Colors.white),
+                                  ? const Color(0xff00a985)
+                                  : Color(0xff1f6563)),
                               borderRadius: (chatList[index].sender ==
                                       AuthService.authService
                                           .getCurrentUser()!
@@ -286,12 +287,12 @@ class ChatPage extends StatelessWidget {
                     width: 270,
                     child: TextField(
                       maxLines: null,
-                      style: TextStyle(color: Colors.white),
+                      style: TextStyle(color: Colors.black),
                       controller: chatController.txtMessage,
-                      cursorColor: Colors.white,
+                      cursorColor: Color(0xff00a985),
                       cursorWidth: 2,
                       decoration: InputDecoration(
-                        labelStyle: TextStyle(color: Colors.white),
+                        labelStyle: TextStyle(color: Colors.black),
                         suffixIcon: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -303,7 +304,7 @@ class ChatPage extends StatelessWidget {
                               },
                               icon: Icon(
                                 Icons.image,
-                                color: Colors.white,
+
                               ),
                             ),
                             IconButton(
@@ -320,7 +321,7 @@ class ChatPage extends StatelessWidget {
                                   await CloudFireStoreServices
                                       .cloudFireStoreServices
                                       .addChatInFireStore(chat);
-                                  chatController.txtMessage.clear();
+
                                   await LocalNotificationServices
                                       .notificationServices
                                       .showNotification(
@@ -330,19 +331,20 @@ class ChatPage extends StatelessWidget {
                                           chatController.txtMessage.text);
 
                                   chatController.getImage("");
+                                  chatController.txtMessage.clear();
                                 },
                                 icon: const Icon(
                                   Icons.send,
-                                  color: Colors.white,
+
                                 )),
                           ],
                         ),
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30),
-                            borderSide: BorderSide(color: Colors.white)),
+                            borderSide: BorderSide(color: Color(0xff00a985))),
                         focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(30),
-                            borderSide: BorderSide(color: Colors.white)),
+                            borderSide: BorderSide(color: Color(0xff00a985))),
                         border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(
                             Radius.circular(10),
@@ -359,7 +361,7 @@ class ChatPage extends StatelessWidget {
                       width: 50,
                       decoration: const BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Color(0xff374751),
+                        color: Color(0xff00a985),
                       ),
                       child: Icon(
                         Icons.mic_rounded,
