@@ -32,8 +32,8 @@ Cloud Storage: Store and share photos, videos, and documents directly from the a
   <img src = "https://github.com/user-attachments/assets/577faaff-05ea-4cd5-876c-9f5e8d1623c3" height = 25%  width = 35%>
 </h>
 
-<div align="center">
-<a href="https://github.com/user-attachments/assets/5086099d-249c-4dc0-a975-1a0d7a6aa45c"> App video!</a>
-</div>
+
+https://github.com/user-attachments/assets/5086099d-249c-4dc0-a975-1a0d7a6aa45c
+
 
 
