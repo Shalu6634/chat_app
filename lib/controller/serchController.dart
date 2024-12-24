@@ -12,7 +12,6 @@ class Searchcontroller extends GetxController
   async {
      var data = await FirebaseFirestore.instance.collection("chatroom").orderBy("name").get();
     return data;
-
   }
 
 }

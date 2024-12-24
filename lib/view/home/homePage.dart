@@ -52,7 +52,7 @@ class HomePage extends StatelessWidget {
           padding: EdgeInsets.all(5),
           child: Text(
             'ChatApp',
-            style: TextStyle(color: Color(0xff00a985), fontSize: 27,fontWeight: FontWeight.bold),
+            style: TextStyle(color: Color(0xff1f6563), fontSize: 27,fontWeight: FontWeight.bold),
           ),
         ),
         actions: [
@@ -97,9 +97,8 @@ class HomePage extends StatelessWidget {
           preferredSize: const Size.fromHeight(70),
           child: Padding(
             padding: const EdgeInsets.only(top: 5,right: 10,left: 10,bottom:15),
-            child:CupertinoSearchTextField(onChanged:(value){
-
-
+            child:CupertinoSearchTextField(controller: searchController.searchEditingController,onChanged:(value){
+              searchController.findUser(value);
             }),
           ),
         ),
