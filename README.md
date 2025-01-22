@@ -39,8 +39,8 @@ Perfect for staying connected with friends, family, or your team!
   <img src = "https://github.com/user-attachments/assets/a63baa66-f992-4ce3-847e-8c74242ad376" height = 25%  width = 25%>
   <img src = "https://github.com/user-attachments/assets/a4ef73c8-c213-4f53-9804-791582230a93" height = 25%  width = 25%>
   <img src = "https://github.com/user-attachments/assets/7ea0cf13-6911-46d5-ba46-f4200dbbd9f9" height = 25%  width = 25%>
+  <img src = "https://github.com/user-attachments/assets/0542f100-cde6-4c06-bb00-eeadb2f7a419" height = 25%  width = 25%>
   <img src = "https://github.com/user-attachments/assets/9c5244fc-792a-45ea-ac03-b853684c315a" height = 25%  width = 25%>
-  
 </p>
 <h>
   <img src = "https://github.com/user-attachments/assets/bb561774-bf3a-4830-b30a-918a6bb68fab" height = 25%  width = 35%>
